@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Layout Oficial - Totalmente Preto e Branco</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Fundo totalmente branco e textos em preto */
+        body {
+            background-color: #ffffff;
+            color: #000000;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Topbar / Header (Preto) */
+        header {
+            background-color: #000000;
+            color: #ffffff;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        /* Espaço no canto esquerdo superior para colocar o seu link de imagem */
+        .header-logo-box {
+            width: 40px;
+            height: 40px;
+            border: 1px solid #ffffff;
+            border-radius: 4px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #222222; /* Fundo escuro neutro caso esteja sem foto */
+        }
+
+        .header-logo-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .header-title {
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        /* Container Principal */
+        .container {
+            max-width: 1000px;
+            width: 100%;
+            margin: 20px auto;
+            padding: 0 15px;
+        }
+
+        /* Bloco de Textos Superiores */
+        .intro-section {
+            margin-bottom: 25px;
+        }
+
+        .text-block {
+            margin-bottom: 12px;
+            line-height: 1.5;
+        }
+
+        .text-block.title {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        /* Grid de Layout (Dois lados) */
+        .main-layout {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 25px;
+            align-items: start;
+        }
+
+        @media (max-width: 768px) {
+            .main-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Seção de Sugestões (Lado Esquerdo) */
+        .suggestions-container {
+            border: 1px solid #000000;
+            padding: 20px 15px;
+            border-radius: 4px;
+            background-color: #ffffff;
+        }
+
+        /* Área de mandar sugestões */
+        .send-suggestion-box {
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #000000;
+        }
+
+        .send-suggestion-box h3 {
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        .send-suggestion-box textarea {
+            width: 100%;
+            height: 70px;
+            padding: 8px;
+            border-radius: 4px;
+            border: 1px solid #000000;
+            resize: none;
+            margin-bottom: 10px;
+            background: #ffffff;
+            color: #000000;
+        }
+
+        .send-suggestion-box button {
+            background-color: #000000;
+            color: #ffffff;
+            border: 1px solid #000000;
+            padding: 8px 15px;
+            font-weight: bold;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .send-suggestion-box button:hover {
+            background-color: #ffffff;
+            color: #000000;
+        }
+
+        /* Lista de Mensagens */
+        .suggestions-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .suggestion-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 10px;
+            border: 1px solid #000000;
+            border-radius: 4px;
+            background-color: #ffffff;
+        }
+
+        /* Foto de perfil */
+        .profile-pic {
+            width: 35px;
+            height: 35px;
+            border: 1px solid #000000;
+            border-radius: 50%;
+            background-color: #ffffff;
+            flex-shrink: 0;
+        }
+
+        .suggestion-content {
+            flex-grow: 1;
+        }
+
+        .suggestion-text {
+            font-size: 14px;
+            word-break: break-word;
+        }
+
+        /* Botão de apagar (Apenas para a própria mensagem) */
+        .delete-btn {
+            background-color: #000000;
+            color: #ffffff;
+            border: 1px solid #000000;
+            font-size: 11px;
+            padding: 3px 8px;
+            border-radius: 3px;
+            cursor: pointer;
+            margin-top: 8px;
+            font-weight: bold;
+            display: inline-block;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .delete-btn:hover {
+            background-color: #ffffff;
+            color: #000000;
+        }
+
+        /* Coluna da Direita (Imagens e Conteúdo) */
+        .content-column {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .content-block {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        /* Cubos de imagem em tons neutros prontos para os links */
+        .image-box {
+            width: 100%;
+            height: 220px;
+            border: 1px solid #000000;
+            border-radius: 4px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f9f9f9;
+        }
+
+        .image-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-logo-box">
+            <img src="https://i.postimg.cc/SKMPvyx4/884-Sem-Titulo-20260604164017.png" alt="Logo">
+        </div>
+        <div class="header-title">Policia Nacional Rolândiá</div>
+    </header>
+
+    <div class="container">
+        
+        <div class="intro-section">
+            <div class="text-block title">Sobre a Policia de Rolândiá</div>
+            <div class="text-block">A Policia foi criada pra registrar os bens do povo e ajudar na justiça e provas, como o Caso TOVIMEEA</div>
+            <div class="text-block">De uma sugestao para o seu Bem ou disque *** caso sofra algo ou mande uma imagem na comunidade Rolândiá</div>
+        </div>
+
+        <div class="main-layout">
+            
+            <div class="suggestions-container">
+                
+                <div class="send-suggestion-box">
+                    <h3>Mandar Sugestões</h3>
+                    <textarea id="suggestionInput" placeholder="Escreva algo..."></textarea>
+                    <button onclick="addSuggestion()">Enviar</button>
+                </div>
+
+                <div class="suggestions-list" id="suggestionsList">
+                    
+                    <div class="suggestion-item">
+                        <div class="profile-pic"></div>
+                        <div class="suggestion-content">
+                            <div class="suggestion-text">Esta é uma sugestão de outro usuário. Como você não é o autor, você não consegue apagá-la.</div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="content-column">
+                
+                <div class="content-block">
+                    <div class="text-block" style="font-weight: bold;">Bandeira da Rolândiá</div>
+                    <div class="image-box">
+                        <img src="https://i.postimg.cc/YSXNKStP/810-Sem-Titulo-20260524225618.png" alt="Sua Imagem 1">
+                    </div>
+                </div>
+
+                <div class="content-block">
+                    <div class="text-block" style="font-weight: bold;">Logo da PNR</div>
+                    <div class="image-box">
+                        <img src="https://i.postimg.cc/SKMPvyx4/884-Sem-Titulo-20260604164017.png" alt="Sua Imagem 2">
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // Cria uma identificação única para quem está com a página aberta
+        const meuUsuarioId = "user_" + Math.random().toString(36).substr(2, 9);
+
+        function addSuggestion() {
+            const input = document.getElementById('suggestionInput');
+            const text = input.value.trim();
+            
+            if (text === '') {
+                alert('Por favor, escreva uma sugestão válida.');
+                return;
+            }
+
+            const list = document.getElementById('suggestionsList');
+
+            // Criando elemento da lista
+            const item = document.createElement('div');
+            item.className = 'suggestion-item';
+            
+            // Define o autor da mensagem
+            item.setAttribute('data-author', meuUsuarioId);
+
+            const profile = document.createElement('div');
+            profile.className = 'profile-pic';
+
+            const contentDiv = document.createElement('div');
+            contentDiv.className = 'suggestion-content';
+
+            const textBlock = document.createElement('div');
+            textBlock.className = 'suggestion-text';
+            textBlock.innerText = text;
+
+            contentDiv.appendChild(textBlock);
+
+            // Segurança: O botão de apagar só é gerado se você mesmo tiver enviado
+            if (item.getAttribute('data-author') === meuUsuarioId) {
+                const deleteBtn = document.createElement('button');
+                deleteBtn.className = 'delete-btn';
+                deleteBtn.innerText = 'Apagar minha sugestão';
+                deleteBtn.onclick = function() {
+                    item.remove();
+                };
+                contentDiv.appendChild(deleteBtn);
+            }
+
+            item.appendChild(profile);
+            item.appendChild(contentDiv);
+
+            // Adiciona no topo da lista
+            list.insertBefore(item, list.firstChild);
+
+            input.value = '';
+        }
+    </script>
+</body>
+</html>
