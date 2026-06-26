@@ -1,263 +1,177 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Placar de Jogos - Uberaba</title>
+    <title>Getnet - Módulo II</title>
     <style>
-        /* Configurações Gerais baseadas na imagem 1000052247.png */
+        /* Estilos globais e estrutura do corpo */
         body {
-            background-color: #22252a; /* Tom de cinza escuro do fundo */
-            color: #ffffff;
-            font-family: 'Arial', sans-serif;
+            font-family: Arial, sans-serif;
             margin: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Área do Cabeçalho (Fundo esverdeado) */
+        header {
+            background-color: #2e8b8b; /* Tom esverdeado/azul-petróleo */
+            color: white;
             padding: 20px;
             display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-            box-sizing: border-box;
+            align-items: flex-end; /* Alinha os elementos pela base */
+            position: relative;
         }
 
-        .container {
-            width: 100%;
-            max-width: 650px;
+        /* Bloco Azul no Cabeçalho como Imagem */
+        .header-icon-blue {
+            width: 80px;  
+            height: 80px; 
+            object-fit: cover; /* Mantém a proporção da imagem sem distorcer */
+            margin-right: 20px; /* Espaço entre o bloco e o texto GETNET */
+            flex-shrink: 0;
+        }
+
+        /* Texto no topo superior direito */
+        .header-top-right {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            text-align: right;
+        }
+
+        .header-year {
+            font-size: 1.5em;
+            letter-spacing: 1px;
+        }
+
+        /* Texto grande 'GETNET' */
+        .getnet-logo {
+            font-size: 3.8em;
+            font-weight: lighter;
+            letter-spacing: 5px;
+            margin-right: 20px;
+            line-height: 1;
+        }
+
+        /* Texto 'MÓDULO II' ao lado do GETNET */
+        .getnet-modulo {
+            font-size: 1.8em;
+            font-weight: lighter;
+            letter-spacing: 2px;
+            margin-bottom: 5px; /* Ajuste fino de alinhamento com a base */
+        }
+
+        /* Área Central Branca */
+        main {
+            background-color: white;
+            padding: 40px;
+            display: flex;
+            justify-content: center; 
+            flex-grow: 1; /* Empurra o rodapé para o final da página */
+        }
+
+        /* Coluna que segura os blocos dos grupos */
+        .groups-column {
             display: flex;
             flex-direction: column;
-        }
-
-        /* Topo: Data, Hora e Espaço para Imagem/Logo no Canto Direito */
-        .topo-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            width: 100%;
-            margin-bottom: 30px;
-        }
-
-        .info-tempo {
-            text-align: left;
-            font-size: 1.2rem;
-            font-weight: bold;
-            line-height: 1.6;
-        }
-
-        .espaco-imagem-topo {
-            width: 90px;
-            height: 90px;
-            border: 2px dashed #555;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: #1a1c20;
-            border-radius: 8px;
-            overflow: hidden;
-        }
-
-        .espaco-imagem-topo img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        /* Confronto e Placar (Centro) */
-        .confronto-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 20px;
-            margin-bottom: 40px;
+            gap: 30px; /* Espaço vertical entre as linhas */
+            max-width: 600px;
             width: 100%;
         }
 
-        .escudo-time {
-            width: 110px;
-            height: 110px;
-            background-color: #0044ff; /* Azul da imagem original */
+        /* Linha individual de cada grupo */
+        .group-row {
             display: flex;
-            flex-direction: column;
             align-items: center;
+            gap: 20px; /* Espaço entre o retângulo verde e o texto */
+        }
+
+        /* Imagens dos blocos verdes */
+        .green-block {
+            width: 220px; /* Largura aproximada da imagem */
+            height: 120px; /* Altura aproximada da imagem */
+            object-fit: cover; /* Mantém a proporção da imagem sem distorcer */
+            flex-shrink: 0;
+        }
+
+        /* Texto dos grupos */
+        .group-text {
+            font-size: 2.2em;
+            font-weight: normal;
+            text-transform: uppercase;
+        }
+
+        /* Rodapé Preto */
+        footer {
+            background-color: black;
+            color: white;
+            display: flex;
             justify-content: center;
-            font-weight: bold;
-            font-size: 1.1rem;
-            border-radius: 4px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-            padding: 5px;
-            box-sizing: border-box;
+            align-items: center;
+            padding: 15px 0;
+            text-transform: uppercase;
             text-align: center;
+            font-size: 1.1em;
+            letter-spacing: 1px;
         }
 
-        .escudo-time img {
-            max-width: 90%;
-            max-height: 75%;
-            object-fit: contain;
-        }
-
-        /* Placar FORA do escudo */
-        .placar-numero {
-            font-size: 3.5rem;
-            font-weight: bold;
-            background-color: #111418;
-            padding: 5px 20px;
-            border-radius: 8px;
-            border: 1px solid #444;
-            min-width: 50px;
-            text-align: center;
-        }
-
-        .versus {
-            font-size: 3.5rem;
-            font-weight: 900;
-            color: #ffffff;
-            font-style: italic;
-        }
-
-        /* Divisória e Lista de Jogadores (Parte Inferior) */
-        .painel-jogadores {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            border-top: 3px solid #ffffff; /* Linha horizontal branca */
-            width: 100%;
-            margin-top: 10px;
-        }
-
-        .coluna {
-            padding: 20px 15px;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .coluna-esquerda {
-            border-right: 3px solid #ffffff; /* Linha vertical branca */
-            align-items: flex-start;
-        }
-
-        .coluna-direita {
-            align-items: flex-start;
-        }
-
-        .lista-jogadores {
-            font-size: 1.1rem;
-            font-weight: bold;
-            line-height: 1.8;
-            margin: 0;
-            padding: 0;
-            list-style: none;
-            width: 100%;
-        }
-
-        .lista-jogadores li {
-            border-bottom: 1px solid #333; /* Linha sutil para guiar a escrita */
-            padding: 2px 0;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
+        /* Quadrados azuis do rodapé */
+        .footer-icon-blue {
+            width: 30px;
+            height: 30px;
+            background-color: blue;
+            margin: 0 15px;
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
+    <header>
+        <div class="header-top-right">
+            <span class="header-year">TODOS OS ANOS2026</span>
+        </div>
+
+        <img src="https://i.postimg.cc/NMLbV6Tt/Getnet2.png" class="header-icon-blue" alt="Getnet">
+
+        <div class="getnet-logo">GETNET</div>
         
-        <!-- TOPO: DATA, HORA E LOGO EXTRA -->
-        <div class="topo-container">
-            <div class="info-tempo">
-                <div>DATA: 28/06/2026</div>
-                <div>HORA: 10:00</div>
-                <div>LOCAL: Estádio Patrocínio</div>
+        <div class="getnet-modulo">MÓDULO II</div>
+    </header>
+
+    <main>
+        <div class="groups-column">
+            <div class="group-row">
+                <img src="https://i.postimg.cc/qMQht9SQ/Screenshot-20260626-201006.png" class="green-block" alt="Imagem Grupo A">
+                <div class="group-text">GRUPO A</div>
             </div>
-            
-            <!-- Link/Espaço para Imagem no canto superior direito -->
-            <div class="espaco-imagem-topo">
-                <!-- Substitua o '#' pelo link da imagem se desejar -->
-                <img src="https://i.postimg.cc/QMJHRf28/Pedia.png" alt="Pedia">
+
+            <div class="group-row">
+                <img src="https://i.postimg.cc/66fTSk9k/Screenshot-20260626-201110.png" class="green-block" alt="Imagem Grupo B">
+                <div class="group-text">GRUPO B</div>
+            </div>
+
+            <div class="group-row">
+                <img src="LINK_DA_IMAGEM_DO_GRUPO_C.png" class="green-block" alt="Imagem Grupo C">
+                <div class="group-text">GRUPO C</div>
+            </div>
+
+            <div class="group-row">
+                <img src="LINK_DA_IMAGEM_DO_GRUPO_D.png" class="green-block" alt="Imagem Grupo D">
+                <div class="group-text">GRUPO D</div>
             </div>
         </div>
+    </main>
 
-        <!-- CENTRO: PLACAR E ESCUDOS -->
-        <div class="confronto-container">
-            
-            <!-- Escudo 1 -->
-            <div class="escudo-time">
-                <img src="https://i.postimg.cc/vBXQBSy5/PATROCINO.png" alt="PATROCÍNIO">
-                C.A PATROCINENSE
-            </div>
-
-            <!-- Gols Mandante (FORA do escudo) -->
-            <div class="placar-numero">0</div> 
-
-            <div class="versus">X</div>
-
-            <!-- Gols Visitante (FORA do escudo) -->
-            <div class="placar-numero">0</div>
-
-            <!-- Escudo 2 -->
-            <div class="escudo-time">
-                <img src="https://i.postimg.cc/dVKQw8md/USCSAF.png" alt="UBERABA">
-                UBERABA
-            </div>
-
+    <footer>
+        <div class="footer-icon-blue"></div>
+        <div>
+            SOMENTE ACOMPANHANDO<br>
+            MÓDULO II
         </div>
-
-        <!-- INFERIOR: 20 ESPAÇOS PARA CADA LADO -->
-        <div class="painel-jogadores">
-            
-            <!-- Coluna Esquerda: 20 Espaços -->
-            <div class="coluna coluna-esquerda">
-                <ul class="lista-jogadores">
-                    <li>01. </li>
-                    <li>02. </li>
-                    <li>03. </li>
-                    <li>04. </li>
-                    <li>05. </li>
-                    <li>06. </li>
-                    <li>07. </li>
-                    <li>08. </li>
-                    <li>09. </li>
-                    <li>10. </li>
-                    <li>11. </li>
-                    <li>12. </li>
-                    <li>13. </li>
-                    <li>14. </li>
-                    <li>15. </li>
-                    <li>16. </li>
-                    <li>17. </li>
-                    <li>18. </li>
-                    <li>19. </li>
-                    <li>20. </li>
-                </ul>
-            </div>
-
-            <!-- Coluna Direita: 20 Espaços -->
-            <div class="coluna coluna-direita">
-                <ul class="lista-jogadores">
-                    <li>01. </li>
-                    <li>02. </li>
-                    <li>03. </li>
-                    <li>04. </li>
-                    <li>05. </li>
-                    <li>06. </li>
-                    <li>07. </li>
-                    <li>08. </li>
-                    <li>09. </li>
-                    <li>10. </li>
-                    <li>11. </li>
-                    <li>12. </li>
-                    <li>13. </li>
-                    <li>14. </li>
-                    <li>15. </li>
-                    <li>16. </li>
-                    <li>17. </li>
-                    <li>18. </li>
-                    <li>19. </li>
-                    <li>20. </li>
-                </ul>
-            </div>
-
-        </div>
-
-    </div>
+        <div class="footer-icon-blue"></div>
+    </footer>
 
 </body>
-    </html>
-    
+</html>
